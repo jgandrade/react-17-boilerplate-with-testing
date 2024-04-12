@@ -13,6 +13,10 @@ This repository serves as a boilerplate for React 17 projects with Jest, Enzyme,
 - **React-DOM:** 17.0.1
 - **React-Scripts:** ^5.0.1
 - **TypeScript:** ^4.1.3
+- **material-ui/core:** 4.12.4
+- **material-ui/lab:** 4.0.0-alpha.61
+- **material-ui/icons:** 4.11.2
+- **react-router-dom:** 4.3.1
 
 ## Development Dependencies
 - **@babel/preset-react:** ^7.24.1
@@ -31,9 +35,6 @@ This repository serves as a boilerplate for React 17 projects with Jest, Enzyme,
 - **Jest-Enzyme:** 7.1.2
 - **ts-jest:** ^25.2.0
 - **babel-jest:** 25.1.0
-- **material-ui/core:** 4.12.4
-- **material-ui/lab:** 4.0.0-alpha.61
-- **material-ui/icons:** 4.11.2
 
 ## Scripts
 - **start:** Start the development server.
