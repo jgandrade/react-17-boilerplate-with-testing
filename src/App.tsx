@@ -54,7 +54,7 @@ function App() {
       <CssBaseline />
       <Box className="App">
         <Box component={"header"} className="App-header">
-          <Typography>
+          {/* <Typography>
             Edit <code>src/App.tsx</code> and save to reload.
           </Typography>
           <a
@@ -64,10 +64,11 @@ function App() {
             rel="noopener noreferrer"
           >
             Learn React
-          </a>
-        </Box>
+          </a> */}
         {/* YOUR ROUTES HERE */}
         <RouteWrapper />
+        </Box>
+
       </Box>
     </ThemeProvider>
   );
