@@ -1,22 +1,35 @@
 import React, { Component } from "react";
+import PokeSearchBar from "../../components/pokeSearchBar";
+import PokeList from "../../components/pokeList";
 
 // Props
 interface Props {}
 
 // State
 interface S {
-  sampleStateNumber: number;
+  pokeSearch: string;
 }
 
 export default class Home extends Component<Props, S> {
+
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      sampleStateNumber: 0,
-    };
+      pokeSearch: "",
+    }
   }
+
+  setPokeSearch = (s: string) => {
+    this.setState({pokeSearch: s})
+  };
+
   render() {
-    return <div>Home {this.state.sampleStateNumber}</div>;
+    return (
+      <div style={{display: "flex", flexDirection: "column", margin: "10px"}}>
+        <PokeSearchBar setPokeSearch={this.setPokeSearch}/>
+        <PokeList pokeSearch={this.state.pokeSearch}/>
+      </div>
+    );
   }
 }
