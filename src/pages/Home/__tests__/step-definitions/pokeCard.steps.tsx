@@ -3,7 +3,7 @@ import { defineFeature, loadFeature } from "jest-cucumber";
 import Card from "../../../../components/pokeCard";
 import * as PokeApi from "../../../../services/pokeApi";
 
-const feature = loadFeature("./src/pages/Home/__tests__/features/pokeList-scenerio.feature");
+const feature = loadFeature("./src/pages/Home/__tests__/features/pokeCard-scenerio.feature");
 
 defineFeature(feature, (test) => {
 
