@@ -4,6 +4,7 @@ import { Pagination } from "@mui/material";
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { getPokemon } from "../../components";
+import { PokemonTypesI } from "../Home";
 
 // Props
 interface Props {
@@ -61,23 +62,24 @@ export default class Profile extends Component<Props, S> {
     try {
 
       const pokemonDetails = await getPokemon(value)
-      this.setState( {
-        pokemonDetails: pokemonDetails || {
-        species: {
-          color: "",
-          generation: "",
-          growthRate: "",
-          habitat: "",
-          textEntry: "",
-        },
-        height: "",
-        id: "",
-        name: "",
-        types: [],
-        weight: "",
-        image: ""
-      }
-      } )
+      return pokemonDetails
+      // this.setState( {
+      //   pokemonDetails: pokemonDetails || {
+      //   species: {
+      //     color: "",
+      //     generation: "",
+      //     growthRate: "",
+      //     habitat: "",
+      //     textEntry: "",
+      //   },
+      //   height: "",
+      //   id: "",
+      //   name: "",
+      //   types: [],
+      //   weight: "",
+      //   image: ""
+      // }
+      // } )
     } catch(err){
       
     }
@@ -87,24 +89,47 @@ export default class Profile extends Component<Props, S> {
     const url = new URL(window.location.href);
     const pathParts = url.pathname.split('/');
     const pokemonId = pathParts[2] || this.props.id || ""
-    const pokemonDetails = await getPokemon(pokemonId)//
+    try {
+      const response:Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+        if (response.status >= 400) {
+          throw new Error("Error")
+        }
+      const jsonResponse = await response?.json()
+
+      const responseSpecies:Response = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`)
+  
+        if (responseSpecies.status >= 400) {
+          throw new Error("Error")
+        } 
+        const jsonResponseSpecies = await responseSpecies?.json()
+  
+        const { name, height, weight, id, types, sprites  } = jsonResponse
+        const { 
+          color, generation, growth_rate,
+          habitat, flavor_text_entries } = jsonResponseSpecies
       this.setState( {
-        pokemonDetails: pokemonDetails || {
-        species: {
-          color: "",
-          generation: "",
-          growthRate: "",
-          habitat: "",
-          textEntry: "",
-        },
-        height: "",
-        id: "",
-        name: "",
-        types: [],
-        weight: "",
-        image: ""
-      }
+        pokemonDetails: {
+          name: name.toUpperCase(),
+          height,
+          id,
+          species: {
+            color: color?.name || "blue",
+            generation: generation.name,
+            growthRate: growth_rate.name,
+            habitat: habitat?.name || "",
+            textEntry: flavor_text_entries[0].flavor_text,
+          },
+          types: types.map((item:PokemonTypesI) => item.type.name),
+          weight,
+          image: sprites?.front_default,
+        }
       } )
+      return 
+    }
+    catch(err){
+    }
+    // const pokemonDetails = await getPokemon(pokemonId)
+      
   }
   
   handleChangePokemon = (value: number) => {

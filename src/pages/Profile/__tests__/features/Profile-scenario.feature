@@ -4,17 +4,17 @@ Feature: Profile
         Given User loading Profile Page
         When I successfully load Profile Page
         Then User will see details of a pokemon
-    
-    Scenario: User display details of a Pokemon
-        Given User loading Profile Page
-        When User successfully load Profile Page
-        Then User is presented with detailed information about the pokemon
 
     Scenario: User retrieves details of a Pokemon
         Given User loading Profile Page
         When User successfully load Profile Page
         Then User successfully call api and display the data of the pokemon
-    
+
+    Scenario: handles error if fetch fails
+        Given User loading Profile Page
+        When User successfully load Profile Page
+        Then User failed to call api
+
     Scenario: Checking if the previous button is there if the id is one
         Given I have loaded the Profile component
         When User load profile with the id of 1

@@ -33,6 +33,7 @@ const getPokemons = async (page: number) => {
             return {};
             })
         );
+        console.log({jsonResponse, moreResponse})
         return {
             pokemonData: moreResponse,
             pokemonCount: jsonResponse.count,
