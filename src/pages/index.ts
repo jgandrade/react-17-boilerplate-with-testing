@@ -1,3 +1,3 @@
-import Home from "./Home";
+import ComponentView from "./BoilerplatePage/ComponentView";
 
-export { Home };
+export { ComponentView };
